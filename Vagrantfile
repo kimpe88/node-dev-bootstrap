@@ -10,15 +10,15 @@ Vagrant::Config.run do |config|
   # Uncomment the following line to allow for symlinks
   # in the app folder. This will not work on Windows, and will
   # not work with Vagrant providers other than VirtualBox
-  # config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/app", "1"]
+  config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/app", "1"]
 
   config.vm.provision :chef_solo do |chef|
     chef.add_recipe "nodejs"
     chef.add_recipe "mongodb-debs"
-    # chef.add_recipe "redis-server"
+    #chef.add_recipe "redis-server"
     chef.json = {
       "nodejs" => {
-        "version" => "0.10.29"
+        "version" => "0.10.36"
         # uncomment the following line to force
 	# recent versions (> 0.8.5) to be built from
 	# the source code
@@ -32,4 +32,5 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :inline => "sudo apt-get install -y ruby1.9.1-dev --no-install-recommends"
   config.vm.provision :shell, :inline => "sudo apt-get install -y ruby1.9.3 --no-install-recommends"
   config.vm.provision :shell, :inline => "sudo gem install cf"
+  config.vm.provision :shell, path: "bootstrap.sh"
 end

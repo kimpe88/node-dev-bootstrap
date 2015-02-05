@@ -1,0 +1,3 @@
+[submodule "app/GeoQuiz"]
+	path = app/GeoQuiz
+	url = https://github.com/kimpe88/GeoQuiz
